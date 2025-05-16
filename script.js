@@ -1,4 +1,4 @@
-CanvaAppsSDK.initialize(async (app) => {
+canva.initialize(async (app) => {
   const scanButton = document.getElementById("scan-button");
   const insertButton = document.getElementById("insert-toc-button");
   const headingsList = document.getElementById("headings-list");
@@ -36,7 +36,7 @@ CanvaAppsSDK.initialize(async (app) => {
   insertButton.addEventListener("click", async () => {
     if (headings.length === 0) return;
 
-    const tocText = "Table of Contents\\n\\n" + headings.map((h, i) => `${i + 1}. ${h}`).join("\\n");
+    const tocText = "Table of Contents\n\n" + headings.map((h, i) => `${i + 1}. ${h}`).join("\n");
 
     try {
       await app.content.insertElement({
@@ -47,3 +47,10 @@ CanvaAppsSDK.initialize(async (app) => {
           fontWeight: "bold"
         }
       });
+      alert("✅ Table of Contents added to your design!");
+    } catch (err) {
+      console.error("Insert error:", err);
+      alert("⚠️ Failed to insert ToC");
+    }
+  });
+});

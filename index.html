@@ -3,19 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Table of Content Generator</title>
-  <script>
-    window.onload = function () {
-      const script = document.createElement("script");
-      script.src = "https://sdk.canva.com/designbutton/v2/api.js";
-      script.onload = function () {
-        // Load script.js AFTER the SDK
-        const mainScript = document.createElement("script");
-        mainScript.src = "script.js";
-        document.body.appendChild(mainScript);
-      };
-      document.head.appendChild(script);
-    };
-  </script>
+  <script src="https://sdk.canva.com/apps/v1/sdk.js"></script>
+  <script defer src="script.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>

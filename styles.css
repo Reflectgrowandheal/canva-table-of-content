@@ -1,7 +1,13 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background: #f8f8f8;
+  background: #f0f0f0;
+}
+.container {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 button {
   padding: 10px 20px;
@@ -14,4 +20,6 @@ button {
   padding: 10px;
   background: #fff;
   border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
 }

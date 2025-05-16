@@ -1,37 +1,56 @@
-const scanButton = document.getElementById("scan-button");
-const insertButton = document.getElementById("insert-toc-button");
-const headingsList = document.getElementById("headings-list");
-let headings = [];
+import { initialize } from 'https://sdk.canva.com/apps/v1/sdk.js';
 
-scanButton.addEventListener("click", async () => {
-  const design = await window.canva.design.getDesign();
-  headings = [];
+initialize(async (app) => {
+  const scanButton = document.getElementById("scan-button");
+  const insertButton = document.getElementById("insert-toc-button");
+  const headingsList = document.getElementById("headings-list");
+  let headings = [];
 
-  for (const page of design.pages) {
-    for (const element of page.elements) {
-      if (element.type === "TEXT" && element.text && element.style?.fontSize >= 24) {
-        headings.push(element.text);
+  scanButton.addEventListener("click", async () => {
+    try {
+      const content = await app.content.get();
+      headings = [];
+
+      content.pages.forEach(page => {
+        page.elements.forEach(el => {
+          if (el.type === "TEXT" && el.text) {
+            const size = el.style?.fontSize || 0;
+            const weight = el.style?.fontWeight || "normal";
+            if (size >= 20 || weight === "bold") {
+              headings.push(el.text);
+            }
+          }
+        });
+      });
+
+      if (headings.length > 0) {
+        headingsList.innerHTML = headings.map(h => `<div>• ${h}</div>`).join("");
+        insertButton.style.display = "block";
+      } else {
+        headingsList.innerHTML = "<em>No headings found. Try using larger font sizes.</em>";
       }
-    }
-  }
-
-  headingsList.innerHTML = headings.map(h => `<div>• ${h}</div>`).join("");
-  insertButton.style.display = "block";
-});
-
-insertButton.addEventListener("click", async () => {
-  if (headings.length === 0) return;
-
-  const tocText = headings.map((h, i) => `${i + 1}. ${h}`).join("\n");
-
-  await window.canva.design.insertElement({
-    type: "TEXT",
-    text: tocText,
-    style: {
-      fontSize: 18,
-      fontWeight: "bold"
+    } catch (err) {
+      console.error("Error scanning design:", err);
     }
   });
 
-  alert("Table of Contents inserted into your design!");
+  insertButton.addEventListener("click", async () => {
+    if (headings.length === 0) return;
+
+    const tocText = "Table of Contents\n\n" + headings.map((h, i) => `${i + 1}. ${h}`).join("\n");
+
+    try {
+      await app.content.insertElement({
+        type: "TEXT",
+        text: tocText,
+        style: {
+          fontSize: 18,
+          fontWeight: "bold"
+        }
+      });
+      alert("✅ Table of Contents added to your design!");
+    } catch (err) {
+      console.error("Error inserting ToC:", err);
+    }
+  });
 });

@@ -3,9 +3,12 @@
   "version": "1.0",
   "description": "Generate and insert a Table of Contents based on your Canva design.",
   "main": "index.html",
-  "permissions": ["design"],
+  "permissions": [
+    "canva:design:content:read",
+    "canva:design:content:write"
+  ],
   "entry_point": {
     "type": "app",
-    "url": "https://reflectgrowandheal.github.io/canva-table-of-content/"
+    "url": "https://reflectgrowandheal.github.io/canva-table-of-content/index.html"
   }
 }

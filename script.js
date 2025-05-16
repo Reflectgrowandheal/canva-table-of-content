@@ -1,4 +1,4 @@
-window.canva.initialize(async (app) => {
+canva.initialize(async (app) => {
   const scanButton = document.getElementById("scan-button");
   const insertButton = document.getElementById("insert-toc-button");
   const headingsList = document.getElementById("headings-list");

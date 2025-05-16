@@ -1,0 +1,11 @@
+{
+  "name": "Table of Content Generator",
+  "version": "1.0",
+  "description": "Generate and insert a Table of Contents based on your Canva design.",
+  "main": "index.html",
+  "permissions": ["design"],
+  "entry_point": {
+    "type": "app",
+    "url": "https://yourdomain.com/index.html"
+  }
+}

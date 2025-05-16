@@ -1,6 +1,4 @@
-import { initialize } from 'https://sdk.canva.com/apps/v1/sdk.js';
-
-initialize(async (app) => {
+window.canva.initialize(async (app) => {
   const scanButton = document.getElementById("scan-button");
   const insertButton = document.getElementById("insert-toc-button");
   const headingsList = document.getElementById("headings-list");
@@ -30,7 +28,8 @@ initialize(async (app) => {
         headingsList.innerHTML = "<em>No headings found. Try using larger font sizes.</em>";
       }
     } catch (err) {
-      console.error("Error scanning design:", err);
+      headingsList.innerHTML = "<em>Error scanning design</em>";
+      console.error("Scan error:", err);
     }
   });
 
@@ -50,7 +49,8 @@ initialize(async (app) => {
       });
       alert("✅ Table of Contents added to your design!");
     } catch (err) {
-      console.error("Error inserting ToC:", err);
+      console.error("Insert error:", err);
+      alert("⚠️ Failed to insert ToC");
     }
   });
 });

@@ -6,6 +6,6 @@
   "permissions": ["design"],
   "entry_point": {
     "type": "app",
-    "url": "https://yourdomain.com/index.html"
+    "url": "https://reflectgrowandheal.github.io/canva-table-of-content/"
   }
 }

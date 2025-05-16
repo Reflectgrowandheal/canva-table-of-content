@@ -36,7 +36,7 @@ window.canva.initialize(async (app) => {
   insertButton.addEventListener("click", async () => {
     if (headings.length === 0) return;
 
-    const tocText = "Table of Contents\n\n" + headings.map((h, i) => `${i + 1}. ${h}`).join("\n");
+    const tocText = "Table of Contents\\n\\n" + headings.map((h, i) => `${i + 1}. ${h}`).join("\\n");
 
     try {
       await app.content.insertElement({
